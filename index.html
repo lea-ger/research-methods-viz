@@ -160,6 +160,10 @@
                 max-width: 90vw;
             }
         }
+
+        .relative {
+            position: relative;
+        }
     </style>
 </head>
 
@@ -208,7 +212,7 @@
                     </div>
                     <div>
                         <h4 class="would-i">Was Dark Pattern wurde wahrscheinlich erkannt. (Analyse anhand der offenen Antworten)</h4>
-                        <div id="cp-found"></div>
+                        <div id="cp-found" class="relative"></div>
                     </div>
                 </div>
             </div>
@@ -233,7 +237,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr id="pre"></tr>
+                            <tr id="pre" ></tr>
                         </tbody>
                     </table>
                 </div>
@@ -249,7 +253,7 @@
                     </div>
                     <div>
                         <h4 class="would-i">Was Dark Pattern wurde wahrscheinlich erkannt. (Analyse anhand der offenen Antworten)</h4>
-                        <div id="pre-found"></div>
+                        <div id="pre-found" class="relative"></div>
                     </div>
                 </div>
             </div>
@@ -290,7 +294,7 @@
                     </div>
                     <div>
                         <h4 class="would-i">Was Dark Pattern wurde wahrscheinlich erkannt. (Analyse anhand der offenen Antworten)</h4>
-                        <div id="hard-found"></div>
+                        <div id="hard-found" class="relative"></div>
                     </div>
                 </div>
             </div>
@@ -331,7 +335,7 @@
                     </div>
                     <div>
                         <h4 class="would-i">Was Dark Pattern wurde wahrscheinlich erkannt. (Analyse anhand der offenen Antworten)</h4>
-                        <div id="social-found"></div>
+                        <div id="social-found" class="relative"></div>
                     </div>
                 </div>
             </div>
@@ -372,7 +376,7 @@
                     </div>
                     <div>
                         <h4 class="would-i">Was Dark Pattern wurde wahrscheinlich erkannt. (Analyse anhand der offenen Antworten)</h4>
-                        <div id="fa-found"></div>
+                        <div id="fa-found" class="relative"></div>
                     </div>
                 </div>
             </div>
@@ -1854,16 +1858,16 @@
 ]
 
     const foundDarkPattern = [
-        [{label: "comparison prevention", value: 5, didFind: true, total: 8},
-        {label: "comparison prevention", value: 3, didFind: false, total: 8},],
-        [{label: "preselection", value: 1, didFind: true, total: 4},
-        {label: "preselection", value: 3, didFind: false, total: 4},],
-        [{label: "hard to cancel", value: 4, didFind: true, total: 4},
-        {label: "hard to cancel", value: 0, didFind: false, total: 4},],
-        [{label: "social proof", value: 0, didFind: true, total: 8},
-        {label: "social proof", value: 8, didFind: false, total: 8},],
-        [{label: "forced action", value: 2, didFind: true, total: 4},
-        {label: "forced action", value: 2, didFind: false, total: 4},],
+        [{label: "comparison prevention", value: 5, didFind: true, total: 8, wouldUse: [3, 1, 1]},
+        {label: "comparison prevention", value: 3, didFind: false, total: 8, wouldUse: [1, 1, 1]},],
+        [{label: "preselection", value: 1, didFind: true, total: 4, wouldUse: [1, 0, 0]},
+        {label: "preselection", value: 3, didFind: false, total: 4, wouldUse: [1, 0, 2], },],
+        [{label: "hard to cancel", value: 4, didFind: true, total: 4, wouldUse: [3, 0, 1]},
+        {label: "hard to cancel", value: 0, didFind: false, total: 4, wouldUse: [0, 0, 0]},],
+        [{label: "social proof", value: 0, didFind: true, total: 8, wouldUse: [0, 0, 0]},
+        {label: "social proof", value: 8, didFind: false, total: 8, wouldUse: [3, 3, 2]},],
+        [{label: "forced action", value: 2, didFind: true, total: 4, wouldUse: [0, 0, 2]},
+        {label: "forced action", value: 2, didFind: false, total: 4, wouldUse: [0, 1, 1]},],
     ]
 
     ;[cpFound, preFound, hardFound, socialFound, faFound].forEach((plot, i) => {
@@ -1871,23 +1875,74 @@
         const height = Math.min(w, 500);
         const radius = Math.min(w, height) / 2;
 
+        const test = i === 0
+
         const data = foundDarkPattern[i];
+        const yesData = data[0].wouldUse;
+        const noData = data[1].wouldUse;
 
         const arc = d3.arc().innerRadius(radius * 0.6).outerRadius(radius - 1);
+        const nestedArc = d3.arc().innerRadius(radius * 0.2).outerRadius(radius  * 0.575);
         const pie = d3.pie().padAngle(1 / radius).sort(null).value(d => d.value);
 
-        const svg = d3.create("svg").attr("viewBox", [-w / 2, -height / 2, w, height]).attr("width", w).attr("height", height);
-        svg.append("g").selectAll().data(pie(data)).join("path")
+        const arcs = pie(data);
+
+        const nestedPieYes = d3.pie().padAngle(1 / (radius + 20)).startAngle(arcs[0].startAngle).endAngle(arcs[0].endAngle).sort(null).value(d => d);
+        const nestedArcsYes = nestedPieYes(yesData);
+        const svgNestedYes = d3.create("svg").attr("style", "position: absolute; inset: 0").attr("viewBox", [-(w + 20) / 2, -(height + 20) / 2, w + 20, height + 20]).attr("width", w + 20).attr("height", height + 20);
+        svgNestedYes.append("g").selectAll().data(nestedArcsYes).join("path")
+            .attr("fill", d => ["#0571b0", "#f7f7f7", "#ca0020"][d.index])
+            .attr("d", nestedArc);
+            svgNestedYes.append("g")
+            .attr("font-family", "sans-serif")
+            .attr("font-size", 12)
+            .attr("text-anchor", "middle")
+            .selectAll()
+            .data(nestedArcsYes)
+            .join("text")
+            .attr("transform", d => `translate(${nestedArc.centroid(d)})`)
+            .call(text => text.append("tspan")).attr("y", "-0.4em").attr("font-weight", "bold").text(d => ["<0", "0", ">0"][d.index])
+            .call(text => text.filter(d => (d.endAngle - d.startAngle) > 0.25).append("tspan")
+                .attr("x", 0)
+                .attr("y", "0.7em")
+                .attr("fill-opacity", 0.7)
+                .text(d => d.data / data[0].total * 100 + "%"));
+            
+        plot.appendChild(svgNestedYes.node());
+
+        const nestedPieNo = d3.pie().padAngle(1 / (radius + 20)).startAngle(arcs[1].startAngle).endAngle(arcs[1].endAngle).sort(null).value(d => d);
+        const nestedArcsNo = nestedPieNo(yesData);
+        const svgNestedNo = d3.create("svg").attr("style", "position: absolute; inset: 0").attr("viewBox", [-(w + 20) / 2, -(height + 20) / 2, w + 20, height + 20]).attr("width", w + 20).attr("height", height + 20);
+        svgNestedNo.append("g").selectAll().data(nestedArcsNo).join("path")
+            .attr("fill", d => ["#0571b0", "#f7f7f7", "#ca0020"][d.index])
+            .attr("d", nestedArc);
+            svgNestedNo.append("g")
+            .attr("font-family", "sans-serif")
+            .attr("font-size", 12)
+            .attr("text-anchor", "middle")
+            .selectAll()
+            .data(nestedArcsNo)
+            .join("text")
+            .attr("transform", d => `translate(${nestedArc.centroid(d)})`)
+            .call(text => text.append("tspan")).attr("y", "-0.4em").attr("font-weight", "bold").text(d => ["<0", "0", ">0"][d.index])
+            .call(text => text.filter(d => (d.endAngle - d.startAngle) > 0.25).append("tspan")
+                .attr("x", 0)
+                .attr("y", "0.7em")
+                .attr("fill-opacity", 0.7)
+                .text(d => d.data / data[0].total * 100 + "%"));
+            
+        plot.appendChild(svgNestedNo.node());
+
+        const svg = d3.create("svg").attr("style", "position: absolute; inset: 0; margin: 10px").attr("viewBox", [-w / 2, -height / 2, w, height]).attr("width", w).attr("height", height);
+        svg.append("g").selectAll().data(arcs).join("path")
             .attr("fill", d => d.data.didFind ? "#67a9cf" : "#ef8a62")
-            .attr("d", arc)
-        .append("title")
-          .text(d => `${d.data.label}`);
+            .attr("d", arc);
         svg.append("g")
             .attr("font-family", "sans-serif")
             .attr("font-size", 12)
             .attr("text-anchor", "middle")
             .selectAll()
-            .data(pie(data))
+            .data(arcs)
             .join("text")
             .attr("transform", d => `translate(${arc.centroid(d)})`)
             .call(text => text.append("tspan")).attr("y", "-0.4em").attr("font-weight", "bold").text(d => d.data.didFind ? "Ja" : "Nein")
