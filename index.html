@@ -64,7 +64,7 @@
             margin-top: 16px;
         }
 
-        .charts > :nth-child(2) {
+        .charts > :not(:first-child) {
             border-left: 2px solid hsla(348, 7%, 13%, 1);
             padding-left: 20px;
         }
@@ -206,6 +206,10 @@
                         <h4 class="would-i">Ich könnte mir vorstellen eine ähnliche Implementierung des Produktes in der Entwicklung zu akzeptieren.</h4>
                         <div id="cp-boxplot"></div>
                     </div>
+                    <div>
+                        <h4 class="would-i">Was Dark Pattern wurde wahrscheinlich erkannt. (Analyse anhand der offenen Antworten)</h4>
+                        <div id="cp-found"></div>
+                    </div>
                 </div>
             </div>
         
@@ -242,6 +246,10 @@
                     <div>
                         <h4 class="would-i">Ich könnte mir vorstellen eine ähnliche Implementierung des Produktes in der Entwicklung zu akzeptieren.</h4>
                         <div id="pre-boxplot"></div>
+                    </div>
+                    <div>
+                        <h4 class="would-i">Was Dark Pattern wurde wahrscheinlich erkannt. (Analyse anhand der offenen Antworten)</h4>
+                        <div id="pre-found"></div>
                     </div>
                 </div>
             </div>
@@ -280,6 +288,10 @@
                         <h4 class="would-i">Ich könnte mir vorstellen eine ähnliche Implementierung des Produktes in der Entwicklung zu akzeptieren.</h4>
                         <div id="hard-boxplot"></div>
                     </div>
+                    <div>
+                        <h4 class="would-i">Was Dark Pattern wurde wahrscheinlich erkannt. (Analyse anhand der offenen Antworten)</h4>
+                        <div id="hard-found"></div>
+                    </div>
                 </div>
             </div>
         
@@ -317,6 +329,10 @@
                         <h4 class="would-i">Ich könnte mir vorstellen eine ähnliche Implementierung des Produktes in der Entwicklung zu akzeptieren.</h4>
                         <div id="social-boxplot"></div>
                     </div>
+                    <div>
+                        <h4 class="would-i">Was Dark Pattern wurde wahrscheinlich erkannt. (Analyse anhand der offenen Antworten)</h4>
+                        <div id="social-found"></div>
+                    </div>
                 </div>
             </div>
         
@@ -353,6 +369,10 @@
                     <div>
                         <h4 class="would-i">Ich könnte mir vorstellen eine ähnliche Implementierung des Produktes in der Entwicklung zu akzeptieren.</h4>
                         <div id="fa-boxplot"></div>
+                    </div>
+                    <div>
+                        <h4 class="would-i">Was Dark Pattern wurde wahrscheinlich erkannt. (Analyse anhand der offenen Antworten)</h4>
+                        <div id="fa-found"></div>
                     </div>
                 </div>
             </div>
@@ -650,21 +670,27 @@
     const resCp = document.getElementById("cp");
     const plotCp = document.getElementById("cp-plot");
     const boxplotCp = document.getElementById("cp-boxplot");
+    const cpFound = document.getElementById("cp-found");
+
     const resPre = document.getElementById("pre");
     const plotPre = document.getElementById("pre-plot");
     const boxplotPre = document.getElementById("pre-boxplot");
+    const preFound = document.getElementById("pre-found");
 
     const resHard = document.getElementById("hard");
     const plotHard = document.getElementById("hard-plot");
     const boxplotHard = document.getElementById("hard-boxplot");
+    const hardFound = document.getElementById("hard-found");
 
     const resSocial = document.getElementById("social");
     const plotSocial = document.getElementById("social-plot");
     const boxplotSocial = document.getElementById("social-boxplot");
+    const socialFound = document.getElementById("social-found");
 
     const resFa = document.getElementById("fa");
     const plotFa = document.getElementById("fa-plot");
     const boxplotFa = document.getElementById("fa-boxplot");
+    const faFound = document.getElementById("fa-found");
 
     const cpndp = [
     {
@@ -780,7 +806,7 @@
                 "answer": 2
             }
         ]
-    }
+    },
 ]
     const predp = [
     {
@@ -1826,6 +1852,53 @@
         ]
     }
 ]
+
+    const foundDarkPattern = [
+        [{label: "comparison prevention", value: 5, didFind: true, total: 8},
+        {label: "comparison prevention", value: 3, didFind: false, total: 8},],
+        [{label: "preselection", value: 1, didFind: true, total: 4},
+        {label: "preselection", value: 3, didFind: false, total: 4},],
+        [{label: "hard to cancel", value: 4, didFind: true, total: 4},
+        {label: "hard to cancel", value: 0, didFind: false, total: 4},],
+        [{label: "social proof", value: 0, didFind: true, total: 8},
+        {label: "social proof", value: 8, didFind: false, total: 8},],
+        [{label: "forced action", value: 2, didFind: true, total: 4},
+        {label: "forced action", value: 2, didFind: false, total: 4},],
+    ]
+
+    ;[cpFound, preFound, hardFound, socialFound, faFound].forEach((plot, i) => {
+        const w = 250
+        const height = Math.min(w, 500);
+        const radius = Math.min(w, height) / 2;
+
+        const data = foundDarkPattern[i];
+
+        const arc = d3.arc().innerRadius(radius * 0.6).outerRadius(radius - 1);
+        const pie = d3.pie().padAngle(1 / radius).sort(null).value(d => d.value);
+
+        const svg = d3.create("svg").attr("viewBox", [-w / 2, -height / 2, w, height]).attr("width", w).attr("height", height);
+        svg.append("g").selectAll().data(pie(data)).join("path")
+            .attr("fill", d => d.data.didFind ? "#67a9cf" : "#ef8a62")
+            .attr("d", arc)
+        .append("title")
+          .text(d => `${d.data.label}`);
+        svg.append("g")
+            .attr("font-family", "sans-serif")
+            .attr("font-size", 12)
+            .attr("text-anchor", "middle")
+            .selectAll()
+            .data(pie(data))
+            .join("text")
+            .attr("transform", d => `translate(${arc.centroid(d)})`)
+            .call(text => text.append("tspan")).attr("y", "-0.4em").attr("font-weight", "bold").text(d => d.data.didFind ? "Ja" : "Nein")
+            .call(text => text.filter(d => (d.endAngle - d.startAngle) > 0.25).append("tspan")
+                .attr("x", 0)
+                .attr("y", "0.7em")
+                .attr("fill-opacity", 0.7)
+                .text(d => d.data.value / d.data.total * 100 + "%"));
+
+            plot.appendChild(svg.node());
+    })
 
     const results = {
         "comparison prevention": {
