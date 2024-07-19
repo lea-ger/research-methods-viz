@@ -91,17 +91,18 @@
         }
 
         .popover {
-          position: fixed;
-          top: 50%;
+            position: fixed;
+            top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
         }
+
         .popover img {
             max-width: 60vw;
         }
 
         .popover::backdrop {
-           background: rgb(190 190 190 / 50%);
+            background: rgb(190 190 190 / 50%);
         }
 
         button {
@@ -111,6 +112,7 @@
             border: none;
             border-radius: 8px;
         }
+
         button + button {
             background-color: rgb(146, 197, 222);
         }
@@ -129,33 +131,43 @@
             h1 {
                 font-size: 1.25rem;
             }
+
             #description {
                 font-size: 0.875rem;
             }
+
             p {
                 font-size: 0.675rem;
             }
+
             h2 {
                 font-size: 1rem;
             }
+
             h3 {
                 font-size: 0.875rem;
             }
+
             h4 {
                 font-size: 0.75rem;
             }
+
             button {
                 font-size: 0.65rem;
             }
+
             th {
                 font-size: 0.75rem;
             }
+
             .charts {
                 flex-wrap: wrap;
             }
+
             .charts > :nth-child(2) {
                 border: none;
             }
+
             .popover img {
                 max-width: 90vw;
             }
@@ -168,271 +180,291 @@
 </head>
 
 <body>
-    <main>
-        <h1>Dark Patterns auf Webseiten - Einschätzung von Informatikstudenten</h1>
-        <p id="description">
-            Auf dieser Website werden die Ergebnisse der Umfrage zur Einschätzung von <i>Dark Patterns</i> präsentiert. Es werden die einzelnen Ergebnisse visuell dargestellt und erläutert.<br/>
-            Im Weiteren wurden Interfaces dargestellt welche entweder ein Dark Pattern enthielten oder nicht, da die Umfrage in einer AB Form durchführt worden ist. Die Antworten zu den einzelnen <i>Dark Pattern</i> werden nun dargestellt.
-        </p>
-        
-        <div style="display: flex; flex-direction: row; gap: 64px; flex-wrap: wrap;">
-            <div>
-                <h2>Comparison Prevention</h2>
-                <p>Die Vergleichbarkeit von Elementen wie z.B. Produkten wird bewusst durch verwirrendes Auflisten von schlecht vergleichbaren Eigenschaften erschwert.</p>
-        
-                <button popovertarget="cp-dp-popover">Zeige Interface Mit Dark Pattern</button>
-                <button popovertarget="cp-n-dp-popover">Zeige Interface Ohne Dark Pattern</button>
-        
-                <div class="sus-container">
-                    <div>
-                        <h4>System Usability Scale</h4>
-                        <p class="sus">Aufgrund der Antworten der Nutzer zu dem System Usability Scale wurden die folgenden Ergebnisse errechnet</p>
-                    </div>
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>Mit Dark Pattern</th>
-                                <th>Ohne Dark Pattern</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr id="cp"></tr>
-                        </tbody>
-                    </table>
+<main>
+    <h1>Dark Patterns auf Webseiten - Einschätzung von Informatikstudenten</h1>
+    <p id="description">
+        Auf dieser Website werden die Ergebnisse der Umfrage zur Einschätzung von <i>Dark Patterns</i> präsentiert. Es
+        werden die einzelnen Ergebnisse visuell dargestellt und erläutert.<br/>
+        Im Weiteren wurden Interfaces dargestellt welche entweder ein Dark Pattern enthielten oder nicht, da die Umfrage
+        in einer AB Form durchführt worden ist. Die Antworten zu den einzelnen <i>Dark Pattern</i> werden nun
+        dargestellt.
+    </p>
+
+    <div style="display: flex; flex-direction: row; gap: 64px; flex-wrap: wrap;">
+        <div>
+            <h2>Comparison Prevention</h2>
+            <p>Die Vergleichbarkeit von Elementen wie z.B. Produkten wird bewusst durch verwirrendes Auflisten von
+                schlecht vergleichbaren Eigenschaften erschwert.</p>
+
+            <button popovertarget="cp-dp-popover">Zeige Interface Mit Dark Pattern</button>
+            <button popovertarget="cp-n-dp-popover">Zeige Interface Ohne Dark Pattern</button>
+
+            <div class="sus-container">
+                <div>
+                    <h4>System Usability Scale</h4>
+                    <p class="sus">Aufgrund der Antworten der Nutzer zu dem System Usability Scale wurden die folgenden
+                        Ergebnisse errechnet</p>
                 </div>
-        
-                <div class="charts">
-                    <div>
-                        <h4>Semantisches Differential</h4>
-                        <div id="cp-plot"></div>
-                    </div>
-                    <div>
-                        <h4 class="would-i">Ich könnte mir vorstellen eine ähnliche Implementierung des Produktes in der Entwicklung zu akzeptieren.</h4>
-                        <div id="cp-boxplot"></div>
-                    </div>
-                    <div>
-                        <h4 class="would-i">Was Dark Pattern wurde wahrscheinlich erkannt. (Analyse anhand der offenen Antworten)</h4>
-                        <div id="cp-found" class="relative"></div>
-                    </div>
+                <table>
+                    <thead>
+                    <tr>
+                        <th>Mit Dark Pattern</th>
+                        <th>Ohne Dark Pattern</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr id="cp"></tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="charts">
+                <div>
+                    <h4>Semantisches Differential</h4>
+                    <div id="cp-plot"></div>
+                </div>
+                <div>
+                    <h4 class="would-i">Ich könnte mir vorstellen eine ähnliche Implementierung des Produktes in der
+                        Entwicklung zu akzeptieren.</h4>
+                    <div id="cp-boxplot"></div>
+                </div>
+                <div>
+                    <h4 class="would-i">Das Dark Pattern wurde wahrscheinlich erkannt. (Analyse anhand der offenen
+                        Antworten)</h4>
+                    <div id="cp-found" class="relative"></div>
                 </div>
             </div>
-        
-            <div>
-                <h2>Preselection</h2>
-                <p>Bestimmte Formularelemente sind vorgefüllt mit einem für den Webseitenbetreiber vorteilhaften Wert.</p>
-        
-                <button popovertarget="pre-dp-popover">Zeige Interface Mit Dark Pattern</button>
-                <button popovertarget="pre-n-dp-popover">Zeige Interface Ohne Dark Pattern</button>
-        
-                <div class="sus-container">
-                    <div>
-                        <h4>System Usability Scale</h4>
-                        <p class="sus">Aufgrund der Antworten der Nutzer zu dem System Usability Scale wurden die folgenden Ergebnisse errechnet</p>
-                    </div>
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>Mit Dark Pattern</th>
-                                <th>Ohne Dark Pattern</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr id="pre" ></tr>
-                        </tbody>
-                    </table>
-                </div>
-        
-                <div class="charts">
-                    <div>
-                        <h4>Semantisches Differential</h4>
-                        <div id="pre-plot"></div>
-                    </div>
-                    <div>
-                        <h4 class="would-i">Ich könnte mir vorstellen eine ähnliche Implementierung des Produktes in der Entwicklung zu akzeptieren.</h4>
-                        <div id="pre-boxplot"></div>
-                    </div>
-                    <div>
-                        <h4 class="would-i">Was Dark Pattern wurde wahrscheinlich erkannt. (Analyse anhand der offenen Antworten)</h4>
-                        <div id="pre-found" class="relative"></div>
-                    </div>
-                </div>
-            </div>
-        
-            <div>
-                <h2>Hard to Cancel</h2>
-                <p>Das Beenden einer für den Webseitenbetreiber vorteilhaften Interaktion ist zwar möglich, wird dem Nutzer jedoch bewusst erschwert.</p>
-        
-                <button popovertarget="hard-dp-popover">Zeige Interface Mit Dark Pattern</button>
-                <button popovertarget="hard-n-dp-popover">Zeige Interface Ohne Dark Pattern</button>
-        
-                <div class="sus-container">
-                    <div>
-                        <h4>System Usability Scale</h4>
-                        <p class="sus">Aufgrund der Antworten der Nutzer zu dem System Usability Scale wurden die folgenden Ergebnisse errechnet</p>
-                    </div>
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>Mit Dark Pattern</th>
-                                <th>Ohne Dark Pattern</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr id="hard"></tr>
-                        </tbody>
-                    </table>
-                </div>
-        
-                <div class="charts">
-                    <div>
-                        <h4>Semantisches Differential</h4>
-                        <div id="hard-plot"></div>
-                    </div>
-                    <div>
-                        <h4 class="would-i">Ich könnte mir vorstellen eine ähnliche Implementierung des Produktes in der Entwicklung zu akzeptieren.</h4>
-                        <div id="hard-boxplot"></div>
-                    </div>
-                    <div>
-                        <h4 class="would-i">Was Dark Pattern wurde wahrscheinlich erkannt. (Analyse anhand der offenen Antworten)</h4>
-                        <div id="hard-found" class="relative"></div>
-                    </div>
-                </div>
-            </div>
-        
-            <div>
-                <h2>Social Proof</h2>
-                <p>Durch Hervorhebung positive Nutzerbeiträge soll die Seite oder bestimmte Beiträge legitimer wirken.</p>
-        
-                <button popovertarget="social-dp-popover">Zeige Interface Mit Dark Pattern</button>
-                <button popovertarget="social-n-dp-popover">Zeige Interface Ohne Dark Pattern</button>
-        
-                <div class="sus-container">
-                    <div>
-                        <h4>System Usability Scale</h4>
-                        <p class="sus">Aufgrund der Antworten der Nutzer zu dem System Usability Scale wurden die folgenden Ergebnisse errechnet</p>
-                    </div>
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>Mit Dark Pattern</th>
-                                <th>Ohne Dark Pattern</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr id="social"></tr>
-                        </tbody>
-                    </table>
-                </div>
-        
-                <div class="charts">
-                    <div>
-                        <h4>Semantisches Differential</h4>
-                        <div id="social-plot"></div>
-                    </div>
-                    <div>
-                        <h4 class="would-i">Ich könnte mir vorstellen eine ähnliche Implementierung des Produktes in der Entwicklung zu akzeptieren.</h4>
-                        <div id="social-boxplot"></div>
-                    </div>
-                    <div>
-                        <h4 class="would-i">Was Dark Pattern wurde wahrscheinlich erkannt. (Analyse anhand der offenen Antworten)</h4>
-                        <div id="social-found" class="relative"></div>
-                    </div>
-                </div>
-            </div>
-        
-            <div>
-                <h2>Forced Action</h2>
-                <p>Eine Aktion muss vom Nutzer durchgeführt werden, egal ob gewollt oder nicht.</p>
-        
-                <button popovertarget="fa-dp-popover">Zeige Interface Mit Dark Pattern</button>
-                <button popovertarget="fa-n-dp-popover">Zeige Interface Ohne Dark Pattern</button>
-        
-                <div class="sus-container">
-                    <div>
-                        <h4>System Usability Scale</h4>
-                        <p class="sus">Aufgrund der Antworten der Nutzer zu dem System Usability Scale wurden die folgenden Ergebnisse errechnet</p>
-                    </div>
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>Mit Dark Pattern</th>
-                                <th>Ohne Dark Pattern</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr id="fa"></tr>
-                        </tbody>
-                    </table>
-                </div>
-        
-                <div class="charts">
-                    <div>
-                        <h4>Semantisches Differential</h4>
-                        <div id="fa-plot"></div>
-                    </div>
-                    <div>
-                        <h4 class="would-i">Ich könnte mir vorstellen eine ähnliche Implementierung des Produktes in der Entwicklung zu akzeptieren.</h4>
-                        <div id="fa-boxplot"></div>
-                    </div>
-                    <div>
-                        <h4 class="would-i">Was Dark Pattern wurde wahrscheinlich erkannt. (Analyse anhand der offenen Antworten)</h4>
-                        <div id="fa-found" class="relative"></div>
-                    </div>
-                </div>
-            </div>
-        
         </div>
-    </main>
-    
-    <div id="cp-dp-popover" class="popover" popover>
-        <h2>Comparison Prevention mit Dark Pattern</h2>
-        <img src="./public/Comparison Prevention - DP.png" alt="Comparison Prevention Interface Mit Dark Pattern">
+
+        <div>
+            <h2>Preselection</h2>
+            <p>Bestimmte Formularelemente sind vorgefüllt mit einem für den Webseitenbetreiber vorteilhaften Wert.</p>
+
+            <button popovertarget="pre-dp-popover">Zeige Interface Mit Dark Pattern</button>
+            <button popovertarget="pre-n-dp-popover">Zeige Interface Ohne Dark Pattern</button>
+
+            <div class="sus-container">
+                <div>
+                    <h4>System Usability Scale</h4>
+                    <p class="sus">Aufgrund der Antworten der Nutzer zu dem System Usability Scale wurden die folgenden
+                        Ergebnisse errechnet</p>
+                </div>
+                <table>
+                    <thead>
+                    <tr>
+                        <th>Mit Dark Pattern</th>
+                        <th>Ohne Dark Pattern</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr id="pre"></tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="charts">
+                <div>
+                    <h4>Semantisches Differential</h4>
+                    <div id="pre-plot"></div>
+                </div>
+                <div>
+                    <h4 class="would-i">Ich könnte mir vorstellen eine ähnliche Implementierung des Produktes in der
+                        Entwicklung zu akzeptieren.</h4>
+                    <div id="pre-boxplot"></div>
+                </div>
+                <div>
+                    <h4 class="would-i">Das Dark Pattern wurde wahrscheinlich erkannt. (Analyse anhand der offenen
+                        Antworten)</h4>
+                    <div id="pre-found" class="relative"></div>
+                </div>
+            </div>
+        </div>
+
+        <div>
+            <h2>Hard to Cancel</h2>
+            <p>Das Beenden einer für den Webseitenbetreiber vorteilhaften Interaktion ist zwar möglich, wird dem Nutzer
+                jedoch bewusst erschwert.</p>
+
+            <button popovertarget="hard-dp-popover">Zeige Interface Mit Dark Pattern</button>
+            <button popovertarget="hard-n-dp-popover">Zeige Interface Ohne Dark Pattern</button>
+
+            <div class="sus-container">
+                <div>
+                    <h4>System Usability Scale</h4>
+                    <p class="sus">Aufgrund der Antworten der Nutzer zu dem System Usability Scale wurden die folgenden
+                        Ergebnisse errechnet</p>
+                </div>
+                <table>
+                    <thead>
+                    <tr>
+                        <th>Mit Dark Pattern</th>
+                        <th>Ohne Dark Pattern</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr id="hard"></tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="charts">
+                <div>
+                    <h4>Semantisches Differential</h4>
+                    <div id="hard-plot"></div>
+                </div>
+                <div>
+                    <h4 class="would-i">Ich könnte mir vorstellen eine ähnliche Implementierung des Produktes in der
+                        Entwicklung zu akzeptieren.</h4>
+                    <div id="hard-boxplot"></div>
+                </div>
+                <div>
+                    <h4 class="would-i">Das Dark Pattern wurde wahrscheinlich erkannt. (Analyse anhand der offenen
+                        Antworten)</h4>
+                    <div id="hard-found" class="relative"></div>
+                </div>
+            </div>
+        </div>
+
+        <div>
+            <h2>Social Proof</h2>
+            <p>Durch Hervorhebung positive Nutzerbeiträge soll die Seite oder bestimmte Beiträge legitimer wirken.</p>
+
+            <button popovertarget="social-dp-popover">Zeige Interface Mit Dark Pattern</button>
+            <button popovertarget="social-n-dp-popover">Zeige Interface Ohne Dark Pattern</button>
+
+            <div class="sus-container">
+                <div>
+                    <h4>System Usability Scale</h4>
+                    <p class="sus">Aufgrund der Antworten der Nutzer zu dem System Usability Scale wurden die folgenden
+                        Ergebnisse errechnet</p>
+                </div>
+                <table>
+                    <thead>
+                    <tr>
+                        <th>Mit Dark Pattern</th>
+                        <th>Ohne Dark Pattern</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr id="social"></tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="charts">
+                <div>
+                    <h4>Semantisches Differential</h4>
+                    <div id="social-plot"></div>
+                </div>
+                <div>
+                    <h4 class="would-i">Ich könnte mir vorstellen eine ähnliche Implementierung des Produktes in der
+                        Entwicklung zu akzeptieren.</h4>
+                    <div id="social-boxplot"></div>
+                </div>
+                <div>
+                    <h4 class="would-i">Das Dark Pattern wurde wahrscheinlich erkannt. (Analyse anhand der offenen
+                        Antworten)</h4>
+                    <div id="social-found" class="relative"></div>
+                </div>
+            </div>
+        </div>
+
+        <div>
+            <h2>Forced Action</h2>
+            <p>Eine Aktion muss vom Nutzer durchgeführt werden, egal ob gewollt oder nicht.</p>
+
+            <button popovertarget="fa-dp-popover">Zeige Interface Mit Dark Pattern</button>
+            <button popovertarget="fa-n-dp-popover">Zeige Interface Ohne Dark Pattern</button>
+
+            <div class="sus-container">
+                <div>
+                    <h4>System Usability Scale</h4>
+                    <p class="sus">Aufgrund der Antworten der Nutzer zu dem System Usability Scale wurden die folgenden
+                        Ergebnisse errechnet</p>
+                </div>
+                <table>
+                    <thead>
+                    <tr>
+                        <th>Mit Dark Pattern</th>
+                        <th>Ohne Dark Pattern</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr id="fa"></tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="charts">
+                <div>
+                    <h4>Semantisches Differential</h4>
+                    <div id="fa-plot"></div>
+                </div>
+                <div>
+                    <h4 class="would-i">Ich könnte mir vorstellen eine ähnliche Implementierung des Produktes in der
+                        Entwicklung zu akzeptieren.</h4>
+                    <div id="fa-boxplot"></div>
+                </div>
+                <div>
+                    <h4 class="would-i">Das Dark Pattern wurde wahrscheinlich erkannt. (Analyse anhand der offenen
+                        Antworten)</h4>
+                    <div id="fa-found" class="relative"></div>
+                </div>
+            </div>
+        </div>
+
     </div>
-    
-    <div id="cp-n-dp-popover" class="popover" popover>
-        <h2>Comparison Prevention ohne Dark Pattern</h2>
-        <img src="./public/Comparison Prevention - No DP.png" alt="Comparison Prevention Interface Ohne Dark Pattern">
-    </div>
-    
-    <div id="pre-dp-popover" class="popover" popover>
-        <h2>Preselection mit Dark Pattern</h2>
-        <img src="./public/Preselection - DP.png" alt="Preselection Interface Mit Dark Pattern">
-    </div>
-    
-    <div id="pre-n-dp-popover" class="popover" popover>
-        <h2>Preselection ohne Dark Pattern</h2>
-        <img src="./public/Preselection - No DP.png" alt="Preselection Interface Ohne Dark Pattern">
-    </div>
-    
-    <div id="hard-dp-popover" class="popover" popover>
-        <h2>Hard to Cancel mit Dark Pattern</h2>
-        <img src="./public/Hard to Cancel - DP.png" alt="Hard to Cancel Interface Mit Dark Pattern">
-    </div>
-    
-    <div id="hard-n-dp-popover" class="popover" popover>
-        <h2>Hard to Cancel ohne Dark Pattern</h2>
-        <img src="./public/Hard to Cancel - No DP.png" alt="Hard to Cancel Interface Ohne Dark Pattern">
-    </div>
-    
-    <div id="social-dp-popover" class="popover" popover>
-        <h2>Social Proof mit Dark Pattern</h2>
-        <img src="./public/Social Proof - DP.png" alt="Social Proof Interface Mit Dark Pattern">
-    </div>
-    
-    <div id="social-n-dp-popover" class="popover" popover>
-        <h2>Social Proof ohne Dark Pattern</h2>
-        <img src="./public/Social Proof - No DP.png" alt="Social Proof Interface Ohne Dark Pattern">
-    </div>
-    
-    <div id="fa-dp-popover" class="popover" popover>
-        <h2>Forced Action mit Dark Pattern</h2>
-        <img src="./public/Forced Action - DP.png" alt="Forced Action Interface Mit Dark Pattern">
-    </div>
-    
-    <div id="fa-n-dp-popover" class="popover" popover>
-        <h2>Forced Action ohne Dark Pattern</h2>
-        <img src="./public/Forced Action - No DP.png" alt="Forced Action Interface Ohne Dark Pattern">
-    </div>
+</main>
+
+<div id="cp-dp-popover" class="popover" popover>
+    <h2>Comparison Prevention mit Dark Pattern</h2>
+    <img src="./public/Comparison Prevention - DP.png" alt="Comparison Prevention Interface Mit Dark Pattern">
+</div>
+
+<div id="cp-n-dp-popover" class="popover" popover>
+    <h2>Comparison Prevention ohne Dark Pattern</h2>
+    <img src="./public/Comparison Prevention - No DP.png" alt="Comparison Prevention Interface Ohne Dark Pattern">
+</div>
+
+<div id="pre-dp-popover" class="popover" popover>
+    <h2>Preselection mit Dark Pattern</h2>
+    <img src="./public/Preselection - DP.png" alt="Preselection Interface Mit Dark Pattern">
+</div>
+
+<div id="pre-n-dp-popover" class="popover" popover>
+    <h2>Preselection ohne Dark Pattern</h2>
+    <img src="./public/Preselection - No DP.png" alt="Preselection Interface Ohne Dark Pattern">
+</div>
+
+<div id="hard-dp-popover" class="popover" popover>
+    <h2>Hard to Cancel mit Dark Pattern</h2>
+    <img src="./public/Hard to Cancel - DP.png" alt="Hard to Cancel Interface Mit Dark Pattern">
+</div>
+
+<div id="hard-n-dp-popover" class="popover" popover>
+    <h2>Hard to Cancel ohne Dark Pattern</h2>
+    <img src="./public/Hard to Cancel - No DP.png" alt="Hard to Cancel Interface Ohne Dark Pattern">
+</div>
+
+<div id="social-dp-popover" class="popover" popover>
+    <h2>Social Proof mit Dark Pattern</h2>
+    <img src="./public/Social Proof - DP.png" alt="Social Proof Interface Mit Dark Pattern">
+</div>
+
+<div id="social-n-dp-popover" class="popover" popover>
+    <h2>Social Proof ohne Dark Pattern</h2>
+    <img src="./public/Social Proof - No DP.png" alt="Social Proof Interface Ohne Dark Pattern">
+</div>
+
+<div id="fa-dp-popover" class="popover" popover>
+    <h2>Forced Action mit Dark Pattern</h2>
+    <img src="./public/Forced Action - DP.png" alt="Forced Action Interface Mit Dark Pattern">
+</div>
+
+<div id="fa-n-dp-popover" class="popover" popover>
+    <h2>Forced Action ohne Dark Pattern</h2>
+    <img src="./public/Forced Action - No DP.png" alt="Forced Action Interface Ohne Dark Pattern">
+</div>
 
 <script type="module">
     import * as Plot from "https://cdn.jsdelivr.net/npm/@observablehq/plot@0.6/+esm";
@@ -697,1262 +729,1207 @@
     const faFound = document.getElementById("fa-found");
 
     const cpndp = [
-    {
-        "question": "Frage: Systemnutzbarkeit1 = Stimme überhaupt nicht zu; 5 = Stimme voll und ganz zu\n",
-        "answers": 30.5
-    },
-    {
-        "question": "Frage: Einschätzung der User ExperienceWählen Sie passende Attribute aus, die auf das gezeigte Interface zutreffen.\n",
-        "answers": [
-            {
-                "label": "Einfach - Kompliziert",
-                "answers": [
-                    3,
-                    2,
-                    2,
-                    2,
-                    1
-                ]
-            },
-            {
-                "label": "Klar - Verwirrend",
-                "answers": [
-                    2,
-                    3,
-                    1,
-                    2,
-                    2
-                ]
-            },
-            {
-                "label": "Vertrauenswürdig - Unvertrauenswürdig",
-                "answers": [
-                    1,
-                    3,
-                    3,
-                    2,
-                    1
-                ]
-            },
-            {
-                "label": "Transparent - Verschleiert",
-                "answers": [
-                    2,
-                    2,
-                    2,
-                    2,
-                    2
-                ]
-            },
-            {
-                "label": "Hilfreich - Irreführend",
-                "answers": [
-                    2,
-                    3,
-                    1,
-                    3,
-                    1
-                ]
-            },
-            {
-                "label": "Intuitiv - Unlogisch",
-                "answers": [
-                    2,
-                    2,
-                    3,
-                    2,
-                    1
-                ]
-            },
-            {
-                "label": "Ehrlich - Manipulativ",
-                "answers": [
-                    1,
-                    3,
-                    1,
-                    2,
-                    2
-                ]
-            },
-            {
-                "label": "Sicher - Kompromittierend",
-                "answers": [
-                    2,
-                    3,
-                    3,
-                    1,
-                    1
-                ]
-            }
-        ]
-    },
-    {
-        "question": "Frage: Ich könnte mir vorstellen eine ähnliche Implementierung des Produktes in der Entwicklung zu akzeptieren.1 = Stimme überhaupt nicht zu; 5 = Stimme voll und ganz zu\n",
-        "answers": [
-            {
-                "label": "1 (1)",
-                "answer": 0
-            },
-            {
-                "label": "2 (2)",
-                "answer": 1
-            },
-            {
-                "label": "3 (3)",
-                "answer": 1
-            },
-            {
-                "label": "4 (4)",
-                "answer": 1
-            },
-            {
-                "label": "5 (5)",
-                "answer": 2
-            }
-        ]
-    },
-]
+        {
+            "question": "Frage: Systemnutzbarkeit1 = Stimme überhaupt nicht zu; 5 = Stimme voll und ganz zu\n",
+            "answers": 30.5
+        },
+        {
+            "question": "Frage: Einschätzung der User ExperienceWählen Sie passende Attribute aus, die auf das gezeigte Interface zutreffen.\n",
+            "answers": [
+                {
+                    "label": "Einfach - Kompliziert",
+                    "answers": [
+                        3,
+                        2,
+                        2,
+                        2,
+                        1
+                    ]
+                },
+                {
+                    "label": "Klar - Verwirrend",
+                    "answers": [
+                        2,
+                        3,
+                        1,
+                        2,
+                        2
+                    ]
+                },
+                {
+                    "label": "Vertrauenswürdig - Unvertrauenswürdig",
+                    "answers": [
+                        1,
+                        3,
+                        3,
+                        2,
+                        1
+                    ]
+                },
+                {
+                    "label": "Transparent - Verschleiert",
+                    "answers": [
+                        2,
+                        2,
+                        2,
+                        2,
+                        2
+                    ]
+                },
+                {
+                    "label": "Hilfreich - Irreführend",
+                    "answers": [
+                        2,
+                        3,
+                        1,
+                        3,
+                        1
+                    ]
+                },
+                {
+                    "label": "Intuitiv - Unlogisch",
+                    "answers": [
+                        2,
+                        2,
+                        3,
+                        2,
+                        1
+                    ]
+                },
+                {
+                    "label": "Ehrlich - Manipulativ",
+                    "answers": [
+                        1,
+                        3,
+                        1,
+                        2,
+                        2
+                    ]
+                },
+                {
+                    "label": "Sicher - Kompromittierend",
+                    "answers": [
+                        2,
+                        3,
+                        3,
+                        1,
+                        1
+                    ]
+                }
+            ]
+        },
+        {
+            "question": "Frage: Ich könnte mir vorstellen eine ähnliche Implementierung des Produktes in der Entwicklung zu akzeptieren.1 = Stimme überhaupt nicht zu; 5 = Stimme voll und ganz zu\n",
+            "answers": [
+                {
+                    "label": "1 (1)",
+                    "answer": 0
+                },
+                {
+                    "label": "2 (2)",
+                    "answer": 1
+                },
+                {
+                    "label": "3 (3)",
+                    "answer": 1
+                },
+                {
+                    "label": "4 (4)",
+                    "answer": 1
+                },
+                {
+                    "label": "5 (5)",
+                    "answer": 2
+                }
+            ]
+        },
+    ]
     const predp = [
-    {
-        "question": "Frage: System Nutzbarkeit1 = Stimme überhaupt nicht zu; 5 = Stimme voll und ganz zu\n",
-        "answers": 40
-    },
-    {
-        "question": "Frage: Einschätzung der User ExperienceWählen Sie passende Attribute aus, die auf das gezeigte Interface zutreffen.\n",
-        "answers": [
-            {
-                "label": "Einfach - Kompliziert",
-                "answers": [
-                    3,
-                    2,
-                    1,
-                    2,
-                    1
-                ]
-            },
-            {
-                "label": "Klar - Verwirrend",
-                "answers": [
-                    3,
-                    1,
-                    1,
-                    3,
-                    1
-                ]
-            },
-            {
-                "label": "Vertrauenswürdig - Unvertrauenswürdig",
-                "answers": [
-                    2,
-                    2,
-                    1,
-                    3,
-                    1
-                ]
-            },
-            {
-                "label": "Transparent - Verschleiert",
-                "answers": [
-                    2,
-                    2,
-                    2,
-                    2,
-                    1
-                ]
-            },
-            {
-                "label": "Hilfreich - Irreführend",
-                "answers": [
-                    3,
-                    1,
-                    2,
-                    2,
-                    1
-                ]
-            },
-            {
-                "label": "Intuitiv - Unlogisch",
-                "answers": [
-                    4,
-                    1,
-                    1,
-                    1,
-                    2
-                ]
-            },
-            {
-                "label": "Ehrlich - Manipulativ",
-                "answers": [
-                    3,
-                    1,
-                    2,
-                    2,
-                    1
-                ]
-            },
-            {
-                "label": "Sicher - Kompromittierend",
-                "answers": [
-                    3,
-                    2,
-                    1,
-                    2,
-                    1
-                ]
-            }
-        ]
-    },
-    {
-        "question": "Frage: Ich könnte mir vorstellen eine ähnliche Implementierung des Produktes in der Entwicklung zu akzeptieren.1 = Stimme überhaupt nicht zu; 5 = Stimme voll und ganz zu\n",
-        "answers": [
-            {
-                "label": "1 (1)",
-                "answer": 1
-            },
-            {
-                "label": "2 (2)",
-                "answer": 1
-            },
-            {
-                "label": "3 (3)",
-                "answer": 0
-            },
-            {
-                "label": "4 (4)",
-                "answer": 0
-            },
-            {
-                "label": "5 (5)",
-                "answer": 2
-            }
-        ]
-    }
-]
+        {
+            "question": "Frage: System Nutzbarkeit1 = Stimme überhaupt nicht zu; 5 = Stimme voll und ganz zu\n",
+            "answers": 40
+        },
+        {
+            "question": "Frage: Einschätzung der User ExperienceWählen Sie passende Attribute aus, die auf das gezeigte Interface zutreffen.\n",
+            "answers": [
+                {
+                    "label": "Einfach - Kompliziert",
+                    "answers": [
+                        3,
+                        2,
+                        1,
+                        2,
+                        1
+                    ]
+                },
+                {
+                    "label": "Klar - Verwirrend",
+                    "answers": [
+                        3,
+                        1,
+                        1,
+                        3,
+                        1
+                    ]
+                },
+                {
+                    "label": "Vertrauenswürdig - Unvertrauenswürdig",
+                    "answers": [
+                        2,
+                        2,
+                        1,
+                        3,
+                        1
+                    ]
+                },
+                {
+                    "label": "Transparent - Verschleiert",
+                    "answers": [
+                        2,
+                        2,
+                        2,
+                        2,
+                        1
+                    ]
+                },
+                {
+                    "label": "Hilfreich - Irreführend",
+                    "answers": [
+                        3,
+                        1,
+                        2,
+                        2,
+                        1
+                    ]
+                },
+                {
+                    "label": "Intuitiv - Unlogisch",
+                    "answers": [
+                        4,
+                        1,
+                        1,
+                        1,
+                        2
+                    ]
+                },
+                {
+                    "label": "Ehrlich - Manipulativ",
+                    "answers": [
+                        3,
+                        1,
+                        2,
+                        2,
+                        1
+                    ]
+                },
+                {
+                    "label": "Sicher - Kompromittierend",
+                    "answers": [
+                        3,
+                        2,
+                        1,
+                        2,
+                        1
+                    ]
+                }
+            ]
+        },
+        {
+            "question": "Frage: Ich könnte mir vorstellen eine ähnliche Implementierung des Produktes in der Entwicklung zu akzeptieren.1 = Stimme überhaupt nicht zu; 5 = Stimme voll und ganz zu\n",
+            "answers": [
+                {
+                    "label": "1 (1)",
+                    "answer": 1
+                },
+                {
+                    "label": "2 (2)",
+                    "answer": 1
+                },
+                {
+                    "label": "3 (3)",
+                    "answer": 0
+                },
+                {
+                    "label": "4 (4)",
+                    "answer": 0
+                },
+                {
+                    "label": "5 (5)",
+                    "answer": 2
+                }
+            ]
+        }
+    ]
     const harddp = [
-    {
-        "question": "Frage: Systemnutzbarkeit1 = Stimme überhaupt nicht zu; 5 = Stimme voll und ganz zu\n",
-        "answers": 22.5
-    },
-    {
-        "question": "Frage: Einschätzung der User ExperienceWählen Sie passende Attribute aus, die auf das gezeigte Interface zutreffen.\n",
-        "answers": [
-            {
-                "label": "Einfach - Kompliziert",
-                "answers": [
-                    3,
-                    2,
-                    1,
-                    2,
-                    1
-                ]
-            },
-            {
-                "label": "Klar - Verwirrend",
-                "answers": [
-                    2,
-                    1,
-                    2,
-                    1,
-                    3
-                ]
-            },
-            {
-                "label": "Vertrauenswürdig - Unvertrauenswürdig",
-                "answers": [
-                    2,
-                    1,
-                    2,
-                    2,
-                    2
-                ]
-            },
-            {
-                "label": "Transparent - Verschleiert",
-                "answers": [
-                    1,
-                    1,
-                    4,
-                    1,
-                    2
-                ]
-            },
-            {
-                "label": "Hilfreich - Irreführend",
-                "answers": [
-                    1,
-                    3,
-                    1,
-                    1,
-                    3
-                ]
-            },
-            {
-                "label": "Intuitiv - Unlogisch",
-                "answers": [
-                    1,
-                    2,
-                    2,
-                    2,
-                    2
-                ]
-            },
-            {
-                "label": "Ehrlich - Manipulativ",
-                "answers": [
-                    1,
-                    1,
-                    2,
-                    2,
-                    3
-                ]
-            },
-            {
-                "label": "Sicher - Kompromittierend",
-                "answers": [
-                    2,
-                    1,
-                    4,
-                    1,
-                    1
-                ]
-            }
-        ]
-    },
-    {
-        "question": "Frage: Ich könnte mir vorstellen eine ähnliche Implementierung des Produktes in der Entwicklung zu akzeptieren.1 = Stimme überhaupt nicht zu; 5 = Stimme voll und ganz zu\n",
-        "answers": [
-            {
-                "label": "1 (1)",
-                "answer": 1
-            },
-            {
-                "label": "2 (2)",
-                "answer": 2
-            },
-            {
-                "label": "3 (3)",
-                "answer": 0
-            },
-            {
-                "label": "4 (4)",
-                "answer": 1
-            },
-            {
-                "label": "5 (5)",
-                "answer": 0
-            }
-        ]
-    }
-]
+        {
+            "question": "Frage: Systemnutzbarkeit1 = Stimme überhaupt nicht zu; 5 = Stimme voll und ganz zu\n",
+            "answers": 22.5
+        },
+        {
+            "question": "Frage: Einschätzung der User ExperienceWählen Sie passende Attribute aus, die auf das gezeigte Interface zutreffen.\n",
+            "answers": [
+                {
+                    "label": "Einfach - Kompliziert",
+                    "answers": [
+                        3,
+                        2,
+                        1,
+                        2,
+                        1
+                    ]
+                },
+                {
+                    "label": "Klar - Verwirrend",
+                    "answers": [
+                        2,
+                        1,
+                        2,
+                        1,
+                        3
+                    ]
+                },
+                {
+                    "label": "Vertrauenswürdig - Unvertrauenswürdig",
+                    "answers": [
+                        2,
+                        1,
+                        2,
+                        2,
+                        2
+                    ]
+                },
+                {
+                    "label": "Transparent - Verschleiert",
+                    "answers": [
+                        1,
+                        1,
+                        4,
+                        1,
+                        2
+                    ]
+                },
+                {
+                    "label": "Hilfreich - Irreführend",
+                    "answers": [
+                        1,
+                        3,
+                        1,
+                        1,
+                        3
+                    ]
+                },
+                {
+                    "label": "Intuitiv - Unlogisch",
+                    "answers": [
+                        1,
+                        2,
+                        2,
+                        2,
+                        2
+                    ]
+                },
+                {
+                    "label": "Ehrlich - Manipulativ",
+                    "answers": [
+                        1,
+                        1,
+                        2,
+                        2,
+                        3
+                    ]
+                },
+                {
+                    "label": "Sicher - Kompromittierend",
+                    "answers": [
+                        2,
+                        1,
+                        4,
+                        1,
+                        1
+                    ]
+                }
+            ]
+        },
+        {
+            "question": "Frage: Ich könnte mir vorstellen eine ähnliche Implementierung des Produktes in der Entwicklung zu akzeptieren.1 = Stimme überhaupt nicht zu; 5 = Stimme voll und ganz zu\n",
+            "answers": [
+                {
+                    "label": "1 (1)",
+                    "answer": 1
+                },
+                {
+                    "label": "2 (2)",
+                    "answer": 2
+                },
+                {
+                    "label": "3 (3)",
+                    "answer": 0
+                },
+                {
+                    "label": "4 (4)",
+                    "answer": 1
+                },
+                {
+                    "label": "5 (5)",
+                    "answer": 0
+                }
+            ]
+        }
+    ]
     const socialndop = [
-    {
-        "question": "Frage: Systemnutzbarkeit1 = Stimme überhaupt nicht zu; 5 = Stimme voll und ganz zu\n",
-        "answers": 40.625
-    },
-    {
-        "question": "Frage: Einschätzung der User ExperienceWählen Sie passende Attribute aus, die auf das gezeigte Interface zutreffen.\n",
-        "answers": [
-            {
-                "label": "Einfach - Kompliziert",
-                "answers": [
-                    4,
-                    2,
-                    1,
-                    1,
-                    1
-                ]
-            },
-            {
-                "label": "Klar - Verwirrend",
-                "answers": [
-                    5,
-                    1,
-                    1,
-                    1,
-                    1
-                ]
-            },
-            {
-                "label": "Vertrauenswürdig - Unvertrauenswürdig",
-                "answers": [
-                    2,
-                    3,
-                    2,
-                    1,
-                    1
-                ]
-            },
-            {
-                "label": "Transparent - Verschleiert",
-                "answers": [
-                    4,
-                    2,
-                    1,
-                    1,
-                    1
-                ]
-            },
-            {
-                "label": "Hilfreich - Irreführend",
-                "answers": [
-                    4,
-                    2,
-                    1,
-                    1,
-                    1
-                ]
-            },
-            {
-                "label": "Intuitiv - Unlogisch",
-                "answers": [
-                    4,
-                    2,
-                    1,
-                    1,
-                    1
-                ]
-            },
-            {
-                "label": "Ehrlich - Manipulativ",
-                "answers": [
-                    4,
-                    2,
-                    1,
-                    1,
-                    1
-                ]
-            },
-            {
-                "label": "Sicher - Kompromittierend",
-                "answers": [
-                    5,
-                    1,
-                    1,
-                    1,
-                    1
-                ]
-            }
-        ]
-    },
-    {
-        "question": "Frage: Ich könnte mir vorstellen eine ähnliche Implementierung des Produktes in der Entwicklung zu akzeptieren.1 = Stimme überhaupt nicht zu; 5 = Stimme voll und ganz zu\n",
-        "answers": [
-            {
-                "label": "1 (1)",
-                "answer": 1
-            },
-            {
-                "label": "2 (2)",
-                "answer": 0
-            },
-            {
-                "label": "3 (3)",
-                "answer": 0
-            },
-            {
-                "label": "4 (4)",
-                "answer": 1
-            },
-            {
-                "label": "5 (5)",
-                "answer": 2
-            }
-        ]
-    }
-]
+        {
+            "question": "Frage: Systemnutzbarkeit1 = Stimme überhaupt nicht zu; 5 = Stimme voll und ganz zu\n",
+            "answers": 40.625
+        },
+        {
+            "question": "Frage: Einschätzung der User ExperienceWählen Sie passende Attribute aus, die auf das gezeigte Interface zutreffen.\n",
+            "answers": [
+                {
+                    "label": "Einfach - Kompliziert",
+                    "answers": [
+                        4,
+                        2,
+                        1,
+                        1,
+                        1
+                    ]
+                },
+                {
+                    "label": "Klar - Verwirrend",
+                    "answers": [
+                        5,
+                        1,
+                        1,
+                        1,
+                        1
+                    ]
+                },
+                {
+                    "label": "Vertrauenswürdig - Unvertrauenswürdig",
+                    "answers": [
+                        2,
+                        3,
+                        2,
+                        1,
+                        1
+                    ]
+                },
+                {
+                    "label": "Transparent - Verschleiert",
+                    "answers": [
+                        4,
+                        2,
+                        1,
+                        1,
+                        1
+                    ]
+                },
+                {
+                    "label": "Hilfreich - Irreführend",
+                    "answers": [
+                        4,
+                        2,
+                        1,
+                        1,
+                        1
+                    ]
+                },
+                {
+                    "label": "Intuitiv - Unlogisch",
+                    "answers": [
+                        4,
+                        2,
+                        1,
+                        1,
+                        1
+                    ]
+                },
+                {
+                    "label": "Ehrlich - Manipulativ",
+                    "answers": [
+                        4,
+                        2,
+                        1,
+                        1,
+                        1
+                    ]
+                },
+                {
+                    "label": "Sicher - Kompromittierend",
+                    "answers": [
+                        5,
+                        1,
+                        1,
+                        1,
+                        1
+                    ]
+                }
+            ]
+        },
+        {
+            "question": "Frage: Ich könnte mir vorstellen eine ähnliche Implementierung des Produktes in der Entwicklung zu akzeptieren.1 = Stimme überhaupt nicht zu; 5 = Stimme voll und ganz zu\n",
+            "answers": [
+                {
+                    "label": "1 (1)",
+                    "answer": 1
+                },
+                {
+                    "label": "2 (2)",
+                    "answer": 0
+                },
+                {
+                    "label": "3 (3)",
+                    "answer": 0
+                },
+                {
+                    "label": "4 (4)",
+                    "answer": 1
+                },
+                {
+                    "label": "5 (5)",
+                    "answer": 2
+                }
+            ]
+        }
+    ]
     const fadp = [
-    {
-        "question": "Frage: Systemnutzbarkeit1 = Stimme überhaupt nicht zu; 5 = Stimme voll und ganz zu\n",
-        "answers": 38.75
-    },
-    {
-        "question": "Frage: Einschätzung der User ExperienceWählen Sie passende Attribute aus, die auf das gezeigte Interface zutreffen.\n",
-        "answers": [
-            {
-                "label": "Einfach - Kompliziert",
-                "answers": [
-                    5,
-                    1,
-                    1,
-                    1,
-                    1
-                ]
-            },
-            {
-                "label": "Klar - Verwirrend",
-                "answers": [
-                    4,
-                    2,
-                    1,
-                    1,
-                    1
-                ]
-            },
-            {
-                "label": "Vertrauenswürdig - Unvertrauenswürdig",
-                "answers": [
-                    2,
-                    1,
-                    3,
-                    2,
-                    1
-                ]
-            },
-            {
-                "label": "Transparent - Verschleiert",
-                "answers": [
-                    2,
-                    3,
-                    1,
-                    2,
-                    1
-                ]
-            },
-            {
-                "label": "Hilfreich - Irreführend",
-                "answers": [
-                    2,
-                    2,
-                    2,
-                    1,
-                    1
-                ]
-            },
-            {
-                "label": "Intuitiv - Unlogisch",
-                "answers": [
-                    3,
-                    2,
-                    2,
-                    1,
-                    1
-                ]
-            },
-            {
-                "label": "Ehrlich - Manipulativ",
-                "answers": [
-                    3,
-                    2,
-                    1,
-                    2,
-                    1
-                ]
-            },
-            {
-                "label": "Sicher - Kompromittierend",
-                "answers": [
-                    2,
-                    2,
-                    3,
-                    1,
-                    1
-                ]
-            }
-        ]
-    },
-    {
-        "question": "Frage: Ich könnte mir vorstellen eine ähnliche Implementierung des Produktes in der Entwicklung zu akzeptieren.1 = Stimme überhaupt nicht zu; 5 = Stimme voll und ganz zu\n",
-        "answers": [
-            {
-                "label": "1 (1)",
-                "answer": 0
-            },
-            {
-                "label": "2 (2)",
-                "answer": 0
-            },
-            {
-                "label": "3 (3)",
-                "answer": 1
-            },
-            {
-                "label": "4 (4)",
-                "answer": 0
-            },
-            {
-                "label": "5 (5)",
-                "answer": 3
-            }
-        ]
-    }
-]
+        {
+            "question": "Frage: Systemnutzbarkeit1 = Stimme überhaupt nicht zu; 5 = Stimme voll und ganz zu\n",
+            "answers": 38.75
+        },
+        {
+            "question": "Frage: Einschätzung der User ExperienceWählen Sie passende Attribute aus, die auf das gezeigte Interface zutreffen.\n",
+            "answers": [
+                {
+                    "label": "Einfach - Kompliziert",
+                    "answers": [
+                        5,
+                        1,
+                        1,
+                        1,
+                        1
+                    ]
+                },
+                {
+                    "label": "Klar - Verwirrend",
+                    "answers": [
+                        4,
+                        2,
+                        1,
+                        1,
+                        1
+                    ]
+                },
+                {
+                    "label": "Vertrauenswürdig - Unvertrauenswürdig",
+                    "answers": [
+                        2,
+                        1,
+                        3,
+                        2,
+                        1
+                    ]
+                },
+                {
+                    "label": "Transparent - Verschleiert",
+                    "answers": [
+                        2,
+                        3,
+                        1,
+                        2,
+                        1
+                    ]
+                },
+                {
+                    "label": "Hilfreich - Irreführend",
+                    "answers": [
+                        2,
+                        2,
+                        2,
+                        1,
+                        1
+                    ]
+                },
+                {
+                    "label": "Intuitiv - Unlogisch",
+                    "answers": [
+                        3,
+                        2,
+                        2,
+                        1,
+                        1
+                    ]
+                },
+                {
+                    "label": "Ehrlich - Manipulativ",
+                    "answers": [
+                        3,
+                        2,
+                        1,
+                        2,
+                        1
+                    ]
+                },
+                {
+                    "label": "Sicher - Kompromittierend",
+                    "answers": [
+                        2,
+                        2,
+                        3,
+                        1,
+                        1
+                    ]
+                }
+            ]
+        },
+        {
+            "question": "Frage: Ich könnte mir vorstellen eine ähnliche Implementierung des Produktes in der Entwicklung zu akzeptieren.1 = Stimme überhaupt nicht zu; 5 = Stimme voll und ganz zu\n",
+            "answers": [
+                {
+                    "label": "1 (1)",
+                    "answer": 0
+                },
+                {
+                    "label": "2 (2)",
+                    "answer": 0
+                },
+                {
+                    "label": "3 (3)",
+                    "answer": 1
+                },
+                {
+                    "label": "4 (4)",
+                    "answer": 0
+                },
+                {
+                    "label": "5 (5)",
+                    "answer": 3
+                }
+            ]
+        }
+    ]
     const cpdp = [
-    {
-        "question": "Frage: Systemnutzbarkeit1 = Stimme überhaupt nicht zu; 5 = Stimme voll und ganz zu\n",
-        "answers": 25.625
-    },
-    {
-        "question": "Frage: Einschätzung der User ExperienceWählen Sie passende Attribute aus, die auf das gezeigte Interface zutreffen.\n",
-        "answers": [
-            {
-                "label": "Einfach - Kompliziert",
-                "answers": [
-                    4,
-                    4,
-                    1,
-                    2,
-                    2
-                ]
-            },
-            {
-                "label": "Klar - Verwirrend",
-                "answers": [
-                    3,
-                    3,
-                    2,
-                    4,
-                    1
-                ]
-            },
-            {
-                "label": "Vertrauenswürdig - Unvertrauenswürdig",
-                "answers": [
-                    2,
-                    2,
-                    2,
-                    5,
-                    2
-                ]
-            },
-            {
-                "label": "Transparent - Verschleiert",
-                "answers": [
-                    2,
-                    2,
-                    3,
-                    3,
-                    3
-                ]
-            },
-            {
-                "label": "Hilfreich - Irreführend",
-                "answers": [
-                    1,
-                    2,
-                    4,
-                    5,
-                    1
-                ]
-            },
-            {
-                "label": "Intuitiv - Unlogisch",
-                "answers": [
-                    3,
-                    4,
-                    2,
-                    3,
-                    1
-                ]
-            },
-            {
-                "label": "Ehrlich - Manipulativ",
-                "answers": [
-                    2,
-                    1,
-                    3,
-                    3,
-                    4
-                ]
-            },
-            {
-                "label": "Sicher - Kompromittierend",
-                "answers": [
-                    3,
-                    4,
-                    3,
-                    2,
-                    1
-                ]
-            }
-        ]
-    },
-    {
-        "question": "Frage: Ich könnte mir vorstellen eine ähnliche Implementierung des Produktes in der Entwicklung zu akzeptieren.1 = Stimme überhaupt nicht zu; 5 = Stimme voll und ganz zu\n",
-        "answers": [
-            {
-                "label": "1 (1)",
-                "answer": 1
-            },
-            {
-                "label": "2 (2)",
-                "answer": 3
-            },
-            {
-                "label": "3 (3)",
-                "answer": 2
-            },
-            {
-                "label": "4 (4)",
-                "answer": 0
-            },
-            {
-                "label": "5 (5)",
-                "answer": 2
-            }
-        ]
-    }
-]
+        {
+            "question": "Frage: Systemnutzbarkeit1 = Stimme überhaupt nicht zu; 5 = Stimme voll und ganz zu\n",
+            "answers": 25.625
+        },
+        {
+            "question": "Frage: Einschätzung der User ExperienceWählen Sie passende Attribute aus, die auf das gezeigte Interface zutreffen.\n",
+            "answers": [
+                {
+                    "label": "Einfach - Kompliziert",
+                    "answers": [
+                        4,
+                        4,
+                        1,
+                        2,
+                        2
+                    ]
+                },
+                {
+                    "label": "Klar - Verwirrend",
+                    "answers": [
+                        3,
+                        3,
+                        2,
+                        4,
+                        1
+                    ]
+                },
+                {
+                    "label": "Vertrauenswürdig - Unvertrauenswürdig",
+                    "answers": [
+                        2,
+                        2,
+                        2,
+                        5,
+                        2
+                    ]
+                },
+                {
+                    "label": "Transparent - Verschleiert",
+                    "answers": [
+                        2,
+                        2,
+                        3,
+                        3,
+                        3
+                    ]
+                },
+                {
+                    "label": "Hilfreich - Irreführend",
+                    "answers": [
+                        1,
+                        2,
+                        4,
+                        5,
+                        1
+                    ]
+                },
+                {
+                    "label": "Intuitiv - Unlogisch",
+                    "answers": [
+                        3,
+                        4,
+                        2,
+                        3,
+                        1
+                    ]
+                },
+                {
+                    "label": "Ehrlich - Manipulativ",
+                    "answers": [
+                        2,
+                        1,
+                        3,
+                        3,
+                        4
+                    ]
+                },
+                {
+                    "label": "Sicher - Kompromittierend",
+                    "answers": [
+                        3,
+                        4,
+                        3,
+                        2,
+                        1
+                    ]
+                }
+            ]
+        },
+        {
+            "question": "Frage: Ich könnte mir vorstellen eine ähnliche Implementierung des Produktes in der Entwicklung zu akzeptieren.1 = Stimme überhaupt nicht zu; 5 = Stimme voll und ganz zu\n",
+            "answers": [
+                {
+                    "label": "1 (1)",
+                    "answer": 1
+                },
+                {
+                    "label": "2 (2)",
+                    "answer": 3
+                },
+                {
+                    "label": "3 (3)",
+                    "answer": 2
+                },
+                {
+                    "label": "4 (4)",
+                    "answer": 0
+                },
+                {
+                    "label": "5 (5)",
+                    "answer": 2
+                }
+            ]
+        }
+    ]
     const prendp = [
-    {
-        "question": "Frage: Systemnutzbarkeit1 = Stimme überhaupt nicht zu; 5 = Stimme voll und ganz zu\n",
-        "answers": 32.5
-    },
-    {
-        "question": "Frage: Einschätzung der User ExperienceWählen Sie passende Attribute aus, die auf das gezeigte Interface zutreffen.\n",
-        "answers": [
-            {
-                "label": "Einfach - Kompliziert",
-                "answers": [
-                    4,
-                    4,
-                    2,
-                    1,
-                    2
-                ]
-            },
-            {
-                "label": "Klar - Verwirrend",
-                "answers": [
-                    4,
-                    2,
-                    4,
-                    1,
-                    2
-                ]
-            },
-            {
-                "label": "Vertrauenswürdig - Unvertrauenswürdig",
-                "answers": [
-                    4,
-                    2,
-                    4,
-                    2,
-                    1
-                ]
-            },
-            {
-                "label": "Transparent - Verschleiert",
-                "answers": [
-                    5,
-                    2,
-                    3,
-                    1,
-                    2
-                ]
-            },
-            {
-                "label": "Hilfreich - Irreführend",
-                "answers": [
-                    4,
-                    2,
-                    3,
-                    3,
-                    1
-                ]
-            },
-            {
-                "label": "Intuitiv - Unlogisch",
-                "answers": [
-                    5,
-                    4,
-                    1,
-                    2,
-                    1
-                ]
-            },
-            {
-                "label": "Ehrlich - Manipulativ",
-                "answers": [
-                    4,
-                    3,
-                    2,
-                    2,
-                    2
-                ]
-            },
-            {
-                "label": "Sicher - Kompromittierend",
-                "answers": [
-                    3,
-                    4,
-                    4,
-                    1,
-                    1
-                ]
-            }
-        ]
-    },
-    {
-        "question": "Frage: Ich könnte mir vorstellen eine ähnliche Implementierung des Produktes in der Entwicklung zu akzeptieren.1 = Stimme überhaupt nicht zu; 5 = Stimme voll und ganz zu\n",
-        "answers": [
-            {
-                "label": "1 (1)",
-                "answer": 2
-            },
-            {
-                "label": "2 (2)",
-                "answer": 0
-            },
-            {
-                "label": "3 (3)",
-                "answer": 2
-            },
-            {
-                "label": "4 (4)",
-                "answer": 2
-            },
-            {
-                "label": "5 (5)",
-                "answer": 2
-            }
-        ]
-    }
-]
+        {
+            "question": "Frage: Systemnutzbarkeit1 = Stimme überhaupt nicht zu; 5 = Stimme voll und ganz zu\n",
+            "answers": 32.5
+        },
+        {
+            "question": "Frage: Einschätzung der User ExperienceWählen Sie passende Attribute aus, die auf das gezeigte Interface zutreffen.\n",
+            "answers": [
+                {
+                    "label": "Einfach - Kompliziert",
+                    "answers": [
+                        4,
+                        4,
+                        2,
+                        1,
+                        2
+                    ]
+                },
+                {
+                    "label": "Klar - Verwirrend",
+                    "answers": [
+                        4,
+                        2,
+                        4,
+                        1,
+                        2
+                    ]
+                },
+                {
+                    "label": "Vertrauenswürdig - Unvertrauenswürdig",
+                    "answers": [
+                        4,
+                        2,
+                        4,
+                        2,
+                        1
+                    ]
+                },
+                {
+                    "label": "Transparent - Verschleiert",
+                    "answers": [
+                        5,
+                        2,
+                        3,
+                        1,
+                        2
+                    ]
+                },
+                {
+                    "label": "Hilfreich - Irreführend",
+                    "answers": [
+                        4,
+                        2,
+                        3,
+                        3,
+                        1
+                    ]
+                },
+                {
+                    "label": "Intuitiv - Unlogisch",
+                    "answers": [
+                        5,
+                        4,
+                        1,
+                        2,
+                        1
+                    ]
+                },
+                {
+                    "label": "Ehrlich - Manipulativ",
+                    "answers": [
+                        4,
+                        3,
+                        2,
+                        2,
+                        2
+                    ]
+                },
+                {
+                    "label": "Sicher - Kompromittierend",
+                    "answers": [
+                        3,
+                        4,
+                        4,
+                        1,
+                        1
+                    ]
+                }
+            ]
+        },
+        {
+            "question": "Frage: Ich könnte mir vorstellen eine ähnliche Implementierung des Produktes in der Entwicklung zu akzeptieren.1 = Stimme überhaupt nicht zu; 5 = Stimme voll und ganz zu\n",
+            "answers": [
+                {
+                    "label": "1 (1)",
+                    "answer": 2
+                },
+                {
+                    "label": "2 (2)",
+                    "answer": 0
+                },
+                {
+                    "label": "3 (3)",
+                    "answer": 2
+                },
+                {
+                    "label": "4 (4)",
+                    "answer": 2
+                },
+                {
+                    "label": "5 (5)",
+                    "answer": 2
+                }
+            ]
+        }
+    ]
     const hardndp = [
-    {
-        "question": "Frage: Systemnutzbarkeit1 = Stimme überhaupt nicht zu; 5 = Stimme voll und ganz zu\n",
-        "answers": 32.5
-    },
-    {
-        "question": "Frage: Einschätzung der User ExperienceWählen Sie passende Attribute aus, die auf das gezeigte Interface zutreffen.\n",
-        "answers": [
-            {
-                "label": "Einfach - Kompliziert",
-                "answers": [
-                    4,
-                    2,
-                    2,
-                    3,
-                    2
-                ]
-            },
-            {
-                "label": "Klar - Verwirrend",
-                "answers": [
-                    3,
-                    3,
-                    2,
-                    3,
-                    2
-                ]
-            },
-            {
-                "label": "Vertrauenswürdig - Unvertrauenswürdig",
-                "answers": [
-                    4,
-                    4,
-                    2,
-                    1,
-                    2
-                ]
-            },
-            {
-                "label": "Transparent - Verschleiert",
-                "answers": [
-                    4,
-                    4,
-                    2,
-                    1,
-                    2
-                ]
-            },
-            {
-                "label": "Hilfreich - Irreführend",
-                "answers": [
-                    3,
-                    4,
-                    2,
-                    2,
-                    2
-                ]
-            },
-            {
-                "label": "Intuitiv - Unlogisch",
-                "answers": [
-                    4,
-                    3,
-                    2,
-                    2,
-                    2
-                ]
-            },
-            {
-                "label": "Ehrlich - Manipulativ",
-                "answers": [
-                    5,
-                    2,
-                    3,
-                    1,
-                    2
-                ]
-            },
-            {
-                "label": "Sicher - Kompromittierend",
-                "answers": [
-                    3,
-                    4,
-                    3,
-                    1,
-                    2
-                ]
-            }
-        ]
-    },
-    {
-        "question": "Frage: Ich könnte mir vorstellen eine ähnliche Implementierung des Produktes in der Entwicklung zu akzeptieren.1 = Stimme überhaupt nicht zu; 5 = Stimme voll und ganz zu\n",
-        "answers": [
-            {
-                "label": "1 (1)",
-                "answer": 1
-            },
-            {
-                "label": "2 (2)",
-                "answer": 0
-            },
-            {
-                "label": "3 (3)",
-                "answer": 3
-            },
-            {
-                "label": "4 (4)",
-                "answer": 2
-            },
-            {
-                "label": "5 (5)",
-                "answer": 2
-            }
-        ]
-    }
-]
+        {
+            "question": "Frage: Systemnutzbarkeit1 = Stimme überhaupt nicht zu; 5 = Stimme voll und ganz zu\n",
+            "answers": 32.5
+        },
+        {
+            "question": "Frage: Einschätzung der User ExperienceWählen Sie passende Attribute aus, die auf das gezeigte Interface zutreffen.\n",
+            "answers": [
+                {
+                    "label": "Einfach - Kompliziert",
+                    "answers": [
+                        4,
+                        2,
+                        2,
+                        3,
+                        2
+                    ]
+                },
+                {
+                    "label": "Klar - Verwirrend",
+                    "answers": [
+                        3,
+                        3,
+                        2,
+                        3,
+                        2
+                    ]
+                },
+                {
+                    "label": "Vertrauenswürdig - Unvertrauenswürdig",
+                    "answers": [
+                        4,
+                        4,
+                        2,
+                        1,
+                        2
+                    ]
+                },
+                {
+                    "label": "Transparent - Verschleiert",
+                    "answers": [
+                        4,
+                        4,
+                        2,
+                        1,
+                        2
+                    ]
+                },
+                {
+                    "label": "Hilfreich - Irreführend",
+                    "answers": [
+                        3,
+                        4,
+                        2,
+                        2,
+                        2
+                    ]
+                },
+                {
+                    "label": "Intuitiv - Unlogisch",
+                    "answers": [
+                        4,
+                        3,
+                        2,
+                        2,
+                        2
+                    ]
+                },
+                {
+                    "label": "Ehrlich - Manipulativ",
+                    "answers": [
+                        5,
+                        2,
+                        3,
+                        1,
+                        2
+                    ]
+                },
+                {
+                    "label": "Sicher - Kompromittierend",
+                    "answers": [
+                        3,
+                        4,
+                        3,
+                        1,
+                        2
+                    ]
+                }
+            ]
+        },
+        {
+            "question": "Frage: Ich könnte mir vorstellen eine ähnliche Implementierung des Produktes in der Entwicklung zu akzeptieren.1 = Stimme überhaupt nicht zu; 5 = Stimme voll und ganz zu\n",
+            "answers": [
+                {
+                    "label": "1 (1)",
+                    "answer": 1
+                },
+                {
+                    "label": "2 (2)",
+                    "answer": 0
+                },
+                {
+                    "label": "3 (3)",
+                    "answer": 3
+                },
+                {
+                    "label": "4 (4)",
+                    "answer": 2
+                },
+                {
+                    "label": "5 (5)",
+                    "answer": 2
+                }
+            ]
+        }
+    ]
     const socialdp = [
-    {
-        "question": "Frage: Systemnutzbarkeit1 = Stimme überhaupt nicht zu; 5 = Stimme voll und ganz zu\n",
-        "answers": 29.6875
-    },
-    {
-        "question": "Frage: Einschätzung der User ExperienceWählen Sie passende Attribute aus, die auf das gezeigte Interface zutreffen.\n",
-        "answers": [
-            {
-                "label": "Einfach - Kompliziert",
-                "answers": [
-                    3,
-                    3,
-                    4,
-                    2,
-                    1
-                ]
-            },
-            {
-                "label": "Klar - Verwirrend",
-                "answers": [
-                    3,
-                    1,
-                    5,
-                    3,
-                    1
-                ]
-            },
-            {
-                "label": "Vertrauenswürdig - Unvertrauenswürdig",
-                "answers": [
-                    1,
-                    2,
-                    5,
-                    4,
-                    1
-                ]
-            },
-            {
-                "label": "Transparent - Verschleiert",
-                "answers": [
-                    1,
-                    5,
-                    5,
-                    1,
-                    1
-                ]
-            },
-            {
-                "label": "Hilfreich - Irreführend",
-                "answers": [
-                    1,
-                    6,
-                    4,
-                    1,
-                    1
-                ]
-            },
-            {
-                "label": "Intuitiv - Unlogisch",
-                "answers": [
-                    2,
-                    4,
-                    5,
-                    1,
-                    1
-                ]
-            },
-            {
-                "label": "Ehrlich - Manipulativ",
-                "answers": [
-                    1,
-                    4,
-                    5,
-                    2,
-                    1
-                ]
-            },
-            {
-                "label": "Sicher - Kompromittierend",
-                "answers": [
-                    2,
-                    3,
-                    6,
-                    1,
-                    1
-                ]
-            }
-        ]
-    },
-    {
-        "question": "Frage: Ich könnte mir vorstellen eine ähnliche Implementierung des Produktes in der Entwicklung zu akzeptieren.1 = Stimme überhaupt nicht zu; 5 = Stimme voll und ganz zu\n",
-        "answers": [
-            {
-                "label": "1 (1)",
-                "answer": 1
-            },
-            {
-                "label": "2 (2)",
-                "answer": 2
-            },
-            {
-                "label": "3 (3)",
-                "answer": 3
-            },
-            {
-                "label": "4 (4)",
-                "answer": 1
-            },
-            {
-                "label": "5 (5)",
-                "answer": 1
-            }
-        ]
-    }
-]
+        {
+            "question": "Frage: Systemnutzbarkeit1 = Stimme überhaupt nicht zu; 5 = Stimme voll und ganz zu\n",
+            "answers": 29.6875
+        },
+        {
+            "question": "Frage: Einschätzung der User ExperienceWählen Sie passende Attribute aus, die auf das gezeigte Interface zutreffen.\n",
+            "answers": [
+                {
+                    "label": "Einfach - Kompliziert",
+                    "answers": [
+                        3,
+                        3,
+                        4,
+                        2,
+                        1
+                    ]
+                },
+                {
+                    "label": "Klar - Verwirrend",
+                    "answers": [
+                        3,
+                        1,
+                        5,
+                        3,
+                        1
+                    ]
+                },
+                {
+                    "label": "Vertrauenswürdig - Unvertrauenswürdig",
+                    "answers": [
+                        1,
+                        2,
+                        5,
+                        4,
+                        1
+                    ]
+                },
+                {
+                    "label": "Transparent - Verschleiert",
+                    "answers": [
+                        1,
+                        5,
+                        5,
+                        1,
+                        1
+                    ]
+                },
+                {
+                    "label": "Hilfreich - Irreführend",
+                    "answers": [
+                        1,
+                        6,
+                        4,
+                        1,
+                        1
+                    ]
+                },
+                {
+                    "label": "Intuitiv - Unlogisch",
+                    "answers": [
+                        2,
+                        4,
+                        5,
+                        1,
+                        1
+                    ]
+                },
+                {
+                    "label": "Ehrlich - Manipulativ",
+                    "answers": [
+                        1,
+                        4,
+                        5,
+                        2,
+                        1
+                    ]
+                },
+                {
+                    "label": "Sicher - Kompromittierend",
+                    "answers": [
+                        2,
+                        3,
+                        6,
+                        1,
+                        1
+                    ]
+                }
+            ]
+        },
+        {
+            "question": "Frage: Ich könnte mir vorstellen eine ähnliche Implementierung des Produktes in der Entwicklung zu akzeptieren.1 = Stimme überhaupt nicht zu; 5 = Stimme voll und ganz zu\n",
+            "answers": [
+                {
+                    "label": "1 (1)",
+                    "answer": 1
+                },
+                {
+                    "label": "2 (2)",
+                    "answer": 2
+                },
+                {
+                    "label": "3 (3)",
+                    "answer": 3
+                },
+                {
+                    "label": "4 (4)",
+                    "answer": 1
+                },
+                {
+                    "label": "5 (5)",
+                    "answer": 1
+                }
+            ]
+        }
+    ]
     const fandp = [
-    {
-        "question": "Frage: Systemnutzbarkeit1 = Stimme überhaupt nicht zu; 5 = Stimme voll und ganz zu\n",
-        "answers": 35
-    },
-    {
-        "question": "Frage: Einschätzung der User ExperienceWählen Sie passende Attribute aus, die auf das gezeigte Interface zutreffen.\n",
-        "answers": [
-            {
-                "label": "Einfach - Kompliziert",
-                "answers": [
-                    5,
-                    4,
-                    1,
-                    2,
-                    1
-                ]
-            },
-            {
-                "label": "Klar - Verwirrend",
-                "answers": [
-                    4,
-                    5,
-                    1,
-                    2,
-                    1
-                ]
-            },
-            {
-                "label": "Vertrauenswürdig - Unvertrauenswürdig",
-                "answers": [
-                    2,
-                    3,
-                    4,
-                    2,
-                    2
-                ]
-            },
-            {
-                "label": "Transparent - Verschleiert",
-                "answers": [
-                    2,
-                    4,
-                    2,
-                    2,
-                    3
-                ]
-            },
-            {
-                "label": "Hilfreich - Irreführend",
-                "answers": [
-                    2,
-                    3,
-                    4,
-                    3,
-                    1
-                ]
-            },
-            {
-                "label": "Intuitiv - Unlogisch",
-                "answers": [
-                    6,
-                    2,
-                    2,
-                    2,
-                    1
-                ]
-            },
-            {
-                "label": "Ehrlich - Manipulativ",
-                "answers": [
-                    2,
-                    3,
-                    4,
-                    2,
-                    2
-                ]
-            },
-            {
-                "label": "Sicher - Kompromittierend",
-                "answers": [
-                    3,
-                    2,
-                    2,
-                    5,
-                    1
-                ]
-            }
-        ]
-    },
-    {
-        "question": "Frage: Ich könnte mir vorstellen eine ähnliche Implementierung des Produktes in der Entwicklung zu akzeptieren.1 = Stimme überhaupt nicht zu; 5 = Stimme voll und ganz zu\n",
-        "answers": [
-            {
-                "label": "1 (1)",
-                "answer": 1
-            },
-            {
-                "label": "2 (2)",
-                "answer": 1
-            },
-            {
-                "label": "3 (3)",
-                "answer": 3
-            },
-            {
-                "label": "4 (4)",
-                "answer": 1
-            },
-            {
-                "label": "5 (5)",
-                "answer": 2
-            }
-        ]
-    }
-]
-
-    const foundDarkPattern = [
-        [{label: "comparison prevention", value: 5, didFind: true, total: 8, wouldUse: [3, 1, 1]},
-        {label: "comparison prevention", value: 3, didFind: false, total: 8, wouldUse: [1, 1, 1]},],
-        [{label: "preselection", value: 1, didFind: true, total: 4, wouldUse: [1, 0, 0]},
-        {label: "preselection", value: 3, didFind: false, total: 4, wouldUse: [1, 0, 2], },],
-        [{label: "hard to cancel", value: 4, didFind: true, total: 4, wouldUse: [3, 0, 1]},
-        {label: "hard to cancel", value: 0, didFind: false, total: 4, wouldUse: [0, 0, 0]},],
-        [{label: "social proof", value: 0, didFind: true, total: 8, wouldUse: [0, 0, 0]},
-        {label: "social proof", value: 8, didFind: false, total: 8, wouldUse: [3, 3, 2]},],
-        [{label: "forced action", value: 2, didFind: true, total: 4, wouldUse: [0, 0, 2]},
-        {label: "forced action", value: 2, didFind: false, total: 4, wouldUse: [0, 1, 1]},],
+        {
+            "question": "Frage: Systemnutzbarkeit1 = Stimme überhaupt nicht zu; 5 = Stimme voll und ganz zu\n",
+            "answers": 35
+        },
+        {
+            "question": "Frage: Einschätzung der User ExperienceWählen Sie passende Attribute aus, die auf das gezeigte Interface zutreffen.\n",
+            "answers": [
+                {
+                    "label": "Einfach - Kompliziert",
+                    "answers": [
+                        5,
+                        4,
+                        1,
+                        2,
+                        1
+                    ]
+                },
+                {
+                    "label": "Klar - Verwirrend",
+                    "answers": [
+                        4,
+                        5,
+                        1,
+                        2,
+                        1
+                    ]
+                },
+                {
+                    "label": "Vertrauenswürdig - Unvertrauenswürdig",
+                    "answers": [
+                        2,
+                        3,
+                        4,
+                        2,
+                        2
+                    ]
+                },
+                {
+                    "label": "Transparent - Verschleiert",
+                    "answers": [
+                        2,
+                        4,
+                        2,
+                        2,
+                        3
+                    ]
+                },
+                {
+                    "label": "Hilfreich - Irreführend",
+                    "answers": [
+                        2,
+                        3,
+                        4,
+                        3,
+                        1
+                    ]
+                },
+                {
+                    "label": "Intuitiv - Unlogisch",
+                    "answers": [
+                        6,
+                        2,
+                        2,
+                        2,
+                        1
+                    ]
+                },
+                {
+                    "label": "Ehrlich - Manipulativ",
+                    "answers": [
+                        2,
+                        3,
+                        4,
+                        2,
+                        2
+                    ]
+                },
+                {
+                    "label": "Sicher - Kompromittierend",
+                    "answers": [
+                        3,
+                        2,
+                        2,
+                        5,
+                        1
+                    ]
+                }
+            ]
+        },
+        {
+            "question": "Frage: Ich könnte mir vorstellen eine ähnliche Implementierung des Produktes in der Entwicklung zu akzeptieren.1 = Stimme überhaupt nicht zu; 5 = Stimme voll und ganz zu\n",
+            "answers": [
+                {
+                    "label": "1 (1)",
+                    "answer": 1
+                },
+                {
+                    "label": "2 (2)",
+                    "answer": 1
+                },
+                {
+                    "label": "3 (3)",
+                    "answer": 3
+                },
+                {
+                    "label": "4 (4)",
+                    "answer": 1
+                },
+                {
+                    "label": "5 (5)",
+                    "answer": 2
+                }
+            ]
+        }
     ]
 
+    const foundDarkPattern = [
+            [{label: "comparison prevention", value: 5, didFind: true, total: 8, wouldUse: [3, 1, 1]},
+                {label: "comparison prevention", value: 3, didFind: false, total: 8, wouldUse: [1, 1, 1]},],
+            [{label: "preselection", value: 1, didFind: true, total: 4, wouldUse: [1, 0, 0]},
+                {label: "preselection", value: 3, didFind: false, total: 4, wouldUse: [1, 0, 2],},],
+            [{label: "hard to cancel", value: 4, didFind: true, total: 4, wouldUse: [3, 0, 1]},
+                {label: "hard to cancel", value: 0, didFind: false, total: 4, wouldUse: [0, 0, 0]},],
+            [{label: "social proof", value: 0, didFind: true, total: 8, wouldUse: [0, 0, 0]},
+                {label: "social proof", value: 8, didFind: false, total: 8, wouldUse: [3, 3, 2]},],
+            [{label: "forced action", value: 2, didFind: true, total: 4, wouldUse: [0, 0, 2]},
+                {label: "forced action", value: 2, didFind: false, total: 4, wouldUse: [0, 1, 1]},],
+        ]
+
     ;[cpFound, preFound, hardFound, socialFound, faFound].forEach((plot, i) => {
-        const w = 250
+        const w = 300
         const height = Math.min(w, 500);
-        const radius = Math.min(w, height) / 2;
 
-        const test = i === 0
+        const data = foundDarkPattern[i].flatMap(item => item.wouldUse.reduce((acc, value, i) => {
+            return [...acc, {...item, wouldUse: value, wouldUseIndex: i+""}]
+        }, []))
 
-        const data = foundDarkPattern[i];
-        const yesData = data[0].wouldUse;
-        const noData = data[1].wouldUse;
+        const stackedBar = Plot.plot({
+            width: w,
+            height,
+            marks: [
+                Plot.barY(data,
+                    {
+                        x: (d) => d.didFind ? "Wurde gefunden" : "Wurde nicht gefunden",
+                        y: "wouldUse",
+                        fill: "wouldUseIndex",
+                    }
+                ),
+            ],
+            color: {
+                scheme: "BuRd",
+                legend: true,
+                tickFormat: (d) => d === "0" ? "Würde nicht implementieren" : d === "1" ? "Neutral" : "Würde implementieren"
+            },
+        })
 
-        const arc = d3.arc().innerRadius(radius * 0.6).outerRadius(radius - 1);
-        const nestedArc = d3.arc().innerRadius(radius * 0.2).outerRadius(radius  * 0.575);
-        const pie = d3.pie().padAngle(1 / radius).sort(null).value(d => d.value);
-
-        const arcs = pie(data);
-
-        const nestedPieYes = d3.pie().padAngle(1 / (radius + 20)).startAngle(arcs[0].startAngle).endAngle(arcs[0].endAngle).sort(null).value(d => d);
-        const nestedArcsYes = nestedPieYes(yesData);
-        const svgNestedYes = d3.create("svg").attr("style", "position: absolute; inset: 0").attr("viewBox", [-(w + 20) / 2, -(height + 20) / 2, w + 20, height + 20]).attr("width", w + 20).attr("height", height + 20);
-        svgNestedYes.append("g").selectAll().data(nestedArcsYes).join("path")
-            .attr("fill", d => ["#0571b0", "#f7f7f7", "#ca0020"][d.index])
-            .attr("d", nestedArc);
-            svgNestedYes.append("g")
-            .attr("font-family", "sans-serif")
-            .attr("font-size", 12)
-            .attr("text-anchor", "middle")
-            .selectAll()
-            .data(nestedArcsYes)
-            .join("text")
-            .attr("transform", d => `translate(${nestedArc.centroid(d)})`)
-            .call(text => text.append("tspan")).attr("y", "-0.4em").attr("font-weight", "bold").text(d => ["<0", "0", ">0"][d.index])
-            .call(text => text.filter(d => (d.endAngle - d.startAngle) > 0.25).append("tspan")
-                .attr("x", 0)
-                .attr("y", "0.7em")
-                .attr("fill-opacity", 0.7)
-                .text(d => d.data / data[0].total * 100 + "%"));
-            
-        plot.appendChild(svgNestedYes.node());
-
-        const nestedPieNo = d3.pie().padAngle(1 / (radius + 20)).startAngle(arcs[1].startAngle).endAngle(arcs[1].endAngle).sort(null).value(d => d);
-        const nestedArcsNo = nestedPieNo(yesData);
-        const svgNestedNo = d3.create("svg").attr("style", "position: absolute; inset: 0").attr("viewBox", [-(w + 20) / 2, -(height + 20) / 2, w + 20, height + 20]).attr("width", w + 20).attr("height", height + 20);
-        svgNestedNo.append("g").selectAll().data(nestedArcsNo).join("path")
-            .attr("fill", d => ["#0571b0", "#f7f7f7", "#ca0020"][d.index])
-            .attr("d", nestedArc);
-            svgNestedNo.append("g")
-            .attr("font-family", "sans-serif")
-            .attr("font-size", 12)
-            .attr("text-anchor", "middle")
-            .selectAll()
-            .data(nestedArcsNo)
-            .join("text")
-            .attr("transform", d => `translate(${nestedArc.centroid(d)})`)
-            .call(text => text.append("tspan")).attr("y", "-0.4em").attr("font-weight", "bold").text(d => ["<0", "0", ">0"][d.index])
-            .call(text => text.filter(d => (d.endAngle - d.startAngle) > 0.25).append("tspan")
-                .attr("x", 0)
-                .attr("y", "0.7em")
-                .attr("fill-opacity", 0.7)
-                .text(d => d.data / data[0].total * 100 + "%"));
-            
-        plot.appendChild(svgNestedNo.node());
-
-        const svg = d3.create("svg").attr("style", "position: absolute; inset: 0; margin: 10px").attr("viewBox", [-w / 2, -height / 2, w, height]).attr("width", w).attr("height", height);
-        svg.append("g").selectAll().data(arcs).join("path")
-            .attr("fill", d => d.data.didFind ? "#67a9cf" : "#ef8a62")
-            .attr("d", arc);
-        svg.append("g")
-            .attr("font-family", "sans-serif")
-            .attr("font-size", 12)
-            .attr("text-anchor", "middle")
-            .selectAll()
-            .data(arcs)
-            .join("text")
-            .attr("transform", d => `translate(${arc.centroid(d)})`)
-            .call(text => text.append("tspan")).attr("y", "-0.4em").attr("font-weight", "bold").text(d => d.data.didFind ? "Ja" : "Nein")
-            .call(text => text.filter(d => (d.endAngle - d.startAngle) > 0.25).append("tspan")
-                .attr("x", 0)
-                .attr("y", "0.7em")
-                .attr("fill-opacity", 0.7)
-                .text(d => d.data.value / d.data.total * 100 + "%"));
-
-            plot.appendChild(svg.node());
+        plot.appendChild(stackedBar);
     })
 
     const results = {
@@ -2077,8 +2054,8 @@
         }
 
         const usageData = [
-        ...mapBarPlotData(datasets["dark pattern"][2].answers, "Mit"),
-        ...mapBarPlotData(datasets["no dark pattern"][2].answers, "Ohne")
+            ...mapBarPlotData(datasets["dark pattern"][2].answers, "Mit"),
+            ...mapBarPlotData(datasets["no dark pattern"][2].answers, "Ohne")
         ]
 
         const usageChart = Plot.plot({
